@@ -1,0 +1,45 @@
+import { Injectable } from '@angular/core';
+
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database'
+import { Employee} from './employee.model';
+import { FormGroup, FormControl } from '@angular/forms';
+@Injectable()
+export class EmployeeService {
+  employeeList: AngularFireList<any>;
+  selectedEmployee: Employee = new Employee();
+  constructor(private firebase :AngularFireDatabase ) { }
+  
+
+  getData(){
+    this.employeeList = this.firebase.list('employees');
+    return this.employeeList;
+  }
+
+  insertEmployee(employee : Employee)
+  {
+    this.employeeList = this.firebase.list('/employees');
+    this.employeeList.push({
+      name: employee.name,
+      position: employee.position,
+      office: employee.office,
+      salary: employee.salary
+    });
+  }
+  
+
+  // updateEmployee(employee : Employee){
+  //   if(employee){
+  //     this.employeeList.set(employee.$key,{
+  //       name:employee.name,
+  //       position:employee.position,
+  //       office:employee.office,
+  //       salary:employee.salary
+  //     });
+  //   }
+  // }
+
+  deleteEmployee($key : string){
+    this.employeeList.remove($key);
+  }
+
+}
