@@ -1,8 +1,18 @@
 <h6 class="text-center">Current Employees</h6><br/>
 <table class="table table-sm table-hover">
+  <tr>
+    <th>Name</th>
+    <th>Position</th>
+    <th>Office</th>
+    <th>Salary</th>
+
+  </tr>
   <tr *ngFor="let employee of employeeList">
       <td>{{employee.name}}</td>
       <td>{{employee.position}}</td>
+      <td>{{employee.office}}</td>
+      <td>{{employee.salary}}</td>
+
       <td>
         
         <a class="btn" (click)="onDelete(employee.$key)">
